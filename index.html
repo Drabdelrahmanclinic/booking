@@ -839,7 +839,7 @@
                         const allowed = bookingSettings.allowedServices || [];
                         typeSelect.innerHTML = Object.entries(pricingTable)
                             .filter(([service, price]) => allowed.length === 0 || allowed.includes(service))
-                            .map(([service, price]) => `<option value="${service}">${service}</option>`)
+                            .map(([service, price]) => `<option value="${service}">${service} (السعر: ${price} ج.م)</option>`)
                             .join('');
                     } else {
                         typeSelect.innerHTML = `
