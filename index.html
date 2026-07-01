@@ -2,7 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#030712">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>حجز موعد أونلاين</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.rtl.min.css">
@@ -26,6 +29,10 @@
             --radius: 24px;
         }
 
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--bg);
@@ -35,10 +42,11 @@
                 radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
             color: var(--text);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             overflow-x: hidden;
         }
 
@@ -51,7 +59,7 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius);
             box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), var(--shadow-glow);
-            padding: 30px;
+            padding: clamp(16px, 4vw, 30px);
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -64,56 +72,58 @@
 
         .header-section {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: clamp(16px, 3vw, 25px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 20px;
+            padding-bottom: clamp(12px, 2.5vw, 20px);
         }
 
         .header-logo {
-            width: 70px;
-            height: 70px;
+            width: clamp(55px, 10vw, 70px);
+            height: clamp(55px, 10vw, 70px);
             background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: clamp(24px, 5vw, 30px);
             color: #fff;
-            margin: 0 auto 15px;
+            margin: 0 auto clamp(10px, 2vw, 15px);
             box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
         }
 
         .clinic-name {
-            font-size: 24px;
+            font-size: clamp(18px, 4.5vw, 24px);
             font-weight: 800;
             margin: 0;
             background: linear-gradient(135deg, #fff, var(--primary-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            word-break: break-word;
         }
 
         .doctor-name {
-            font-size: 16px;
+            font-size: clamp(13px, 2.5vw, 16px);
             color: var(--accent);
             font-weight: 700;
             margin-top: 5px;
+            word-break: break-word;
         }
 
         .instruction-card {
             background: rgba(14, 165, 233, 0.08);
             border: 1px dashed rgba(14, 165, 233, 0.3);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 13px;
+            border-radius: clamp(12px, 2vw, 16px);
+            padding: clamp(12px, 2vw, 15px);
+            margin-bottom: clamp(14px, 2.5vw, 20px);
+            font-size: clamp(12px, 2vw, 13px);
             line-height: 1.6;
         }
 
         .form-label {
             font-weight: 700;
-            font-size: 13px;
+            font-size: clamp(12px, 2vw, 13px);
             color: #fff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .form-control, .form-select {
@@ -121,9 +131,11 @@
             border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
             color: #ffffff !important;
             border-radius: 12px !important;
-            padding: 12px 16px;
+            padding: clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px);
             font-weight: 600;
+            font-size: clamp(14px, 2.5vw, 16px);
             transition: all 0.3s ease;
+            min-height: 44px;
         }
 
         .form-control:focus, .form-select:focus {
@@ -135,6 +147,7 @@
         .form-control::placeholder {
             color: #cbd5e1 !important;
             opacity: 0.9 !important;
+            font-size: clamp(12px, 2vw, 14px);
         }
 
         .form-select option {
@@ -154,13 +167,15 @@
             color: #fff;
             border: none;
             border-radius: 12px;
-            padding: 14px;
+            padding: clamp(12px, 2.5vw, 14px);
             font-weight: 800;
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
             width: 100%;
             box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
             transition: all 0.3s;
-            margin-top: 15px;
+            margin-top: clamp(12px, 2vw, 15px);
+            cursor: pointer;
+            min-height: 48px;
         }
 
         .btn-booking:hover {
@@ -168,28 +183,40 @@
             box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
         }
 
+        .btn-booking:active {
+            transform: translateY(0);
+        }
+
         .disabled-message {
             text-align: center;
-            padding: 40px 20px;
+            padding: clamp(24px, 6vw, 40px) clamp(12px, 3vw, 20px);
         }
 
         .disabled-message i {
-            font-size: 50px;
+            font-size: clamp(36px, 8vw, 50px);
             color: #ef4444;
-            margin-bottom: 20px;
+            margin-bottom: clamp(12px, 3vw, 20px);
+        }
+
+        .disabled-message h3 {
+            font-size: clamp(18px, 4vw, 24px);
+        }
+
+        .disabled-message p {
+            font-size: clamp(13px, 2.5vw, 15px);
         }
 
         /* ===== WORKING HOURS CARDS (RECTANGULAR) ===== */
         .hours-wrapper {
-            margin-bottom: 28px;
+            margin-bottom: clamp(18px, 3.5vw, 28px);
             position: relative;
         }
         .hours-title {
             text-align: center;
-            font-size: 20px;
+            font-size: clamp(16px, 3.5vw, 20px);
             font-weight: 900;
             color: #fff;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
             text-shadow: 0 2px 20px rgba(14,165,233,0.3);
             animation: titleFade 0.8s ease both;
         }
@@ -203,17 +230,17 @@
         }
         .hours-cards {
             display: flex;
-            gap: 12px;
+            gap: clamp(8px, 1.5vw, 12px);
             justify-content: center;
             align-items: stretch;
             flex-wrap: wrap;
         }
         .hour-card-attractive {
             flex: 1;
-            min-width: 150px;
+            min-width: 140px;
             max-width: 220px;
             border-radius: 14px;
-            padding: 14px 14px 12px;
+            padding: clamp(10px, 2vw, 14px);
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.06);
@@ -222,6 +249,9 @@
         }
         .hour-card-attractive:hover {
             transform: translateY(-4px);
+        }
+        .hour-card-attractive:active {
+            transform: translateY(-2px);
         }
         .hour-card-attractive::before {
             content: '';
@@ -268,14 +298,14 @@
             z-index: 0;
         }
         .hour-card-attractive .card-label {
-            font-size: 10px;
+            font-size: clamp(9px, 1.8vw, 11px);
             font-weight: 700;
             color: rgba(255,255,255,0.8);
             margin-bottom: 3px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .hour-card-attractive .card-time {
-            font-size: 16px;
+            font-size: clamp(13px, 2.8vw, 16px);
             font-weight: 900;
             color: #fff;
             text-shadow: 0 2px 12px rgba(0,0,0,0.5);
@@ -310,12 +340,6 @@
             0%, 100% { opacity: 0.2; transform: scaleX(0.8); }
             50% { opacity: 0.8; transform: scaleX(1); }
         }
-        @media (max-width: 500px) {
-            .hour-card-attractive { min-width: 130px; padding: 12px 10px 10px; }
-            .hour-card-attractive .card-time { font-size: 14px; }
-            .hour-card-attractive .card-label { font-size: 10px; }
-            .hours-title { font-size: 16px; }
-        }
         .auto-time-badge {
             display: inline-flex;
             align-items: center;
@@ -323,14 +347,16 @@
             background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(14, 165, 233, 0.1));
             border: 1px solid rgba(45, 212, 191, 0.3);
             border-radius: 10px;
-            padding: 8px 14px;
-            margin-top: 12px;
-            font-size: 13px;
+            padding: clamp(6px, 1.2vw, 8px) clamp(10px, 2vw, 14px);
+            margin-top: clamp(8px, 1.5vw, 12px);
+            font-size: clamp(12px, 2vw, 13px);
             font-weight: 700;
             color: var(--accent);
             animation: fadeIn 0.5s ease both;
+            width: 100%;
+            justify-content: center;
         }
-        .auto-time-badge i { font-size: 14px; }
+        .auto-time-badge i { font-size: clamp(12px, 2vw, 14px); }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Success Card Styling */
@@ -345,8 +371,8 @@
         }
 
         .success-icon {
-            width: 80px;
-            height: 80px;
+            width: clamp(60px, 12vw, 80px);
+            height: clamp(60px, 12vw, 80px);
             background: rgba(45, 212, 191, 0.15);
             border: 2px solid var(--accent);
             color: var(--accent);
@@ -354,8 +380,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 38px;
-            margin: 0 auto 20px;
+            font-size: clamp(28px, 6vw, 38px);
+            margin: 0 auto clamp(12px, 3vw, 20px);
             animation: pulseGlow 2s infinite;
         }
 
@@ -365,20 +391,29 @@
             100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
         }
 
+        .success-card h3 {
+            font-size: clamp(18px, 4vw, 24px);
+        }
+
+        .success-card p {
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+
         .receipt-box {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px 0;
+            border-radius: clamp(12px, 2.5vw, 16px);
+            padding: clamp(14px, 3vw, 20px);
+            margin: clamp(14px, 3vw, 20px) 0;
             text-align: right;
-            font-size: 14px;
+            font-size: clamp(13px, 2.2vw, 14px);
         }
 
         .receipt-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             padding-bottom: 8px;
         }
@@ -392,21 +427,24 @@
         .receipt-label {
             color: var(--text-muted);
             font-weight: 600;
+            flex-shrink: 0;
         }
 
         .receipt-value {
             color: #fff;
             font-weight: 700;
+            text-align: left;
+            word-break: break-word;
         }
 
         .loading-screen {
             text-align: center;
-            padding: 50px 0;
+            padding: clamp(30px, 8vw, 50px) 0;
         }
 
         .spinner-custom {
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
             border: 4px solid rgba(14, 165, 233, 0.1);
             border-left-color: var(--primary);
             border-radius: 50%;
@@ -417,6 +455,86 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+        /* Small phones (under 400px) */
+        @media (max-width: 399px) {
+            body { padding: 8px; }
+            .booking-container { border-radius: 20px; }
+            .hours-cards { flex-direction: column; align-items: center; }
+            .hour-card-attractive { min-width: 100%; max-width: 100%; }
+            .form-control, .form-select { font-size: 16px; }
+        }
+
+        /* Small to medium phones (400-575px) */
+        @media (max-width: 575px) {
+            body { padding: 10px; }
+            .booking-container { border-radius: 20px; }
+            .hours-cards { gap: 8px; }
+            .hour-card-attractive { min-width: calc(50% - 4px); }
+            .form-control, .form-select { font-size: 16px; }
+            .receipt-row { flex-direction: column; gap: 2px; }
+            .receipt-label { font-size: clamp(12px, 3vw, 13px); }
+            .receipt-value { text-align: right; font-size: clamp(13px, 3.5vw, 15px); }
+        }
+
+        /* Tablets (576-767px) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            body { padding: 14px; }
+            .booking-container { padding: 24px; }
+            .hour-card-attractive { min-width: 160px; }
+        }
+
+        /* Large screens (1200px+) */
+        @media (min-width: 1200px) {
+            .booking-container { max-width: 640px; }
+        }
+
+        /* Landscape phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body { padding: 6px; align-items: flex-start; padding-top: 8px; }
+            .booking-container { padding: 10px 14px; border-radius: 16px; max-width: 100%; }
+            .header-section { margin-bottom: 6px; padding-bottom: 6px; }
+            .header-logo { width: 36px; height: 36px; font-size: 16px; margin-bottom: 4px; display: none; }
+            .clinic-name { font-size: 14px; }
+            .doctor-name { font-size: 11px; margin-top: 2px; }
+            .instruction-card { padding: 6px 10px; margin-bottom: 6px; font-size: 10px; border-radius: 10px; }
+            .hours-wrapper { margin-bottom: 6px; }
+            .hours-title { font-size: 11px; margin-bottom: 4px; }
+            .hours-cards { gap: 4px; }
+            .hour-card-attractive { padding: 4px 8px; min-width: 100px; border-radius: 10px; }
+            .hour-card-attractive .card-time { font-size: 11px; }
+            .hour-card-attractive .card-label { font-size: 8px; }
+            .hour-card-attractive .card-glow-line { display: none; }
+            .hour-card-attractive::before, .hour-card-attractive::after { display: none; }
+            .form-control, .form-select { padding: 4px 8px; min-height: 32px; font-size: 12px; border-radius: 8px !important; }
+            .form-label { font-size: 10px; margin-bottom: 2px; }
+            .row { --bs-gutter-y: 0.3rem; }
+            .btn-booking { padding: 6px; min-height: 36px; font-size: 12px; margin-top: 4px; border-radius: 8px; }
+            .auto-time-badge { padding: 4px 8px; margin-top: 4px; font-size: 10px; }
+        }
+
+        /* Prevent zoom on iOS inputs */
+        @supports (-webkit-touch-callout: none) {
+            .form-control, .form-select { font-size: 16px; }
+        }
+
+        /* Reduced motion for accessibility/performance */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .booking-container { animation: none; }
+        }
+
+        /* Dark mode scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
@@ -474,11 +592,11 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">رقم الهاتف</label>
-                        <input type="tel" class="form-control" id="patientPhone" required placeholder="مثال: 01xxxxxxxxx">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">العمر</label>
-                        <input type="number" class="form-control" id="patientAge" required placeholder="السن">
+                        <input type="tel" class="form-control" id="patientPhone" required placeholder="مثال: 01xxxxxxxxx" inputmode="numeric">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">العمر</label>
+                            <input type="number" class="form-control" id="patientAge" required placeholder="السن" inputmode="numeric">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">النوع</label>
@@ -789,7 +907,9 @@
                     if (dateStr) {
                         await autoAssignTime(dateStr);
                     }
-                }
+                },
+                monthSelectorType: "dropdown",
+                touchScroll: false
             });
         }
 
