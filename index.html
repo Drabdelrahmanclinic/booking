@@ -179,6 +179,160 @@
             margin-bottom: 20px;
         }
 
+        /* ===== WORKING HOURS CARDS (RECTANGULAR) ===== */
+        .hours-wrapper {
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .hours-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 20px rgba(14,165,233,0.3);
+            animation: titleFade 0.8s ease both;
+        }
+        .hours-title i {
+            color: var(--accent);
+            margin-left: 8px;
+        }
+        @keyframes titleFade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hours-cards {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        .hour-card-attractive {
+            flex: 1;
+            min-width: 150px;
+            max-width: 220px;
+            border-radius: 14px;
+            padding: 14px 14px 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+            animation: cardFloat 5s ease-in-out infinite;
+            transition: transform 0.3s;
+        }
+        .hour-card-attractive:hover {
+            transform: translateY(-4px);
+        }
+        .hour-card-attractive::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: inherit;
+            filter: blur(24px);
+            opacity: 0.35;
+            z-index: -1;
+            animation: cardPulse 4s ease-in-out infinite;
+        }
+        .hour-card-attractive::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            opacity: 0.6;
+        }
+        .hour-card-sunWed {
+            background: linear-gradient(145deg, rgba(14,165,233,0.15), rgba(14,165,233,0.04));
+            box-shadow: 0 8px 30px rgba(14,165,233,0.1), inset 0 1px 0 rgba(255,255,255,0.06);
+            animation-delay: 0s;
+        }
+        .hour-card-satThu {
+            background: linear-gradient(145deg, rgba(45,212,191,0.15), rgba(45,212,191,0.04));
+            box-shadow: 0 8px 30px rgba(45,212,191,0.1), inset 0 1px 0 rgba(255,255,255,0.06);
+            animation-delay: 1.5s;
+        }
+        .hour-card-attractive .card-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .hour-card-attractive .card-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hour-card-attractive .card-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .hour-card-attractive .card-time {
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+            white-space: nowrap;
+        }
+        .hour-card-attractive .card-glow-line {
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            width: 70%;
+            height: 2px;
+            border-radius: 2px;
+            animation: glowLine 3s ease-in-out infinite;
+        }
+        .hour-card-attractive .card-glow-line::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 2px;
+            filter: blur(6px);
+            opacity: 0.7;
+        }
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes cardPulse {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.02); }
+        }
+        @keyframes glowLine {
+            0%, 100% { opacity: 0.2; transform: scaleX(0.8); }
+            50% { opacity: 0.8; transform: scaleX(1); }
+        }
+        @media (max-width: 500px) {
+            .hour-card-attractive { min-width: 130px; padding: 12px 10px 10px; }
+            .hour-card-attractive .card-time { font-size: 14px; }
+            .hour-card-attractive .card-label { font-size: 10px; }
+            .hours-title { font-size: 16px; }
+        }
+        .auto-time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(14, 165, 233, 0.1));
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 10px;
+            padding: 8px 14px;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            animation: fadeIn 0.5s ease both;
+        }
+        .auto-time-badge i { font-size: 14px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         /* Success Card Styling */
         .success-card {
             text-align: center;
@@ -287,6 +441,31 @@
                 <div id="displayBookingNote" style="color:#e2e8f0"></div>
             </div>
 
+            <!-- إعلان مواعيد العيادة - بطاقات متحركة -->
+            <div class="hours-wrapper" id="hoursAnnouncement">
+                <div class="hours-title">
+                    <i class="fas fa-clock"></i> مواعيد العيادة
+                </div>
+                <div class="hours-cards">
+                    <div class="hour-card-attractive hour-card-sunWed" id="cardSunWed">
+                        <div class="card-shine"></div>
+                        <div class="card-content">
+                            <div class="card-label" id="cardLabelSunWed">الأحد و الاثنين و الثلاثاء و الأربعاء</div>
+                            <div class="card-time" id="cardTimeSunWed">من الساعه 4 إلى 9 م</div>
+                        </div>
+                        <div class="card-glow-line" style="background:rgba(14,165,233,0.5);"></div>
+                    </div>
+                    <div class="hour-card-attractive hour-card-satThu" id="cardSatThu">
+                        <div class="card-shine"></div>
+                        <div class="card-content">
+                            <div class="card-label" id="cardLabelSatThu">السبت و الخميس</div>
+                            <div class="card-time" id="cardTimeSatThu">من الساعه 7 إلى 10 م</div>
+                        </div>
+                        <div class="card-glow-line" style="background:rgba(45,212,191,0.5);"></div>
+                    </div>
+                </div>
+            </div>
+
             <form id="bookingForm" onsubmit="handleFormSubmit(event)">
                 <div class="row g-3">
                     <div class="col-12">
@@ -308,15 +487,15 @@
                             <option value="أنثى">أنثى</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <label class="form-label">تاريخ الحجز</label>
                         <input type="text" class="form-control" id="bookingDate" required placeholder="اختر تاريخ الكشف">
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">ساعة وموعد الحجز</label>
-                        <select class="form-select" id="bookingSlot" required disabled>
-                            <option value="" selected disabled>اختر تاريخ الحجز أولاً</option>
-                        </select>
+                    <div class="col-12" id="autoTimeContainer" style="display:none">
+                        <div class="auto-time-badge" id="autoTimeBadge">
+                            <i class="fas fa-magic"></i>
+                            <span><strong id="autoTimeValue">—</strong></span>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label class="form-label">نوع الحجز والخدمة المطلوبة</label>
@@ -366,14 +545,6 @@
                     <span class="receipt-label">تاريخ الحجز</span>
                     <span class="receipt-value" id="recDate"></span>
                 </div>
-                <div class="receipt-row">
-                    <span class="receipt-label">ساعة الموعد</span>
-                    <span class="receipt-value" id="recSlot" style="color:var(--primary-light)"></span>
-                </div>
-            </div>
-
-            <div class="alert alert-warning py-2 text-start small mb-4" style="line-height:1.6; border-radius:12px; background:rgba(245, 158, 11, 0.1); border:1px solid rgba(245, 158, 11, 0.2); color:#f59e0b">
-                <strong>تنبيه هام:</strong> يرجى الالتزام بالموعد المحدد والحضور قبل الوقت بـ 15 دقيقة للتأكيد. في حال الرغبة في الإلغاء يرجى الاتصال هاتفياً بالعيادة.
             </div>
 
             <button type="button" class="btn-booking" onclick="location.reload()" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); box-shadow:none">
@@ -419,6 +590,24 @@
         doctorId = urlParams.get('doc') || 'default';
         dbPrefix = doctorId === 'default' ? '' : `clinics/${doctorId}/`;
 
+        // State for auto-assigned time
+        let autoAssignedTime = '';
+        let bookingWorkingHours = {};
+        let bookingSlotDuration = 30;
+
+        // Day helpers
+        const dayNames = { sat:'السبت', sun:'الأحد', mon:'الاثنين', tue:'الثلاثاء', wed:'الأربعاء', thu:'الخميس', fri:'الجمعة' };
+        const dayIndex  = { sat:6, sun:0, mon:1, tue:2, wed:3, thu:4, fri:5 };
+
+        function isDayInGroup(dayCode, groupDays) {
+            return groupDays && groupDays.includes(dayCode);
+        }
+
+        function joinDayNames(dayCodes) {
+            if (!dayCodes || dayCodes.length === 0) return '';
+            return dayCodes.map(d => dayNames[d] || d).join(' و ');
+        }
+
         // Helpers
         function getArabicDay(dateStr) {
             if (!dateStr) return '';
@@ -456,14 +645,72 @@
                 if (bookingSnap.exists()) {
                     bookingSettings = bookingSnap.val();
                 } else {
-                    // Default values if settings do not exist
                     bookingSettings = {
                         enabled: true,
                         note: 'يرجى الحضور قبل الموعد بـ 15 دقيقة للتأكيد.',
                         days: ['sat', 'sun', 'mon', 'tue', 'wed', 'thu'],
-                        slots: ['05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00']
+                        workingHours: {
+                            group1: { days:['sun','mon','tue','wed'], start:'16:00', end:'21:00' },
+                            group2: { days:['sat','thu'], start:'19:00', end:'22:00' }
+                        }
                     };
                 }
+
+                // Store working hours
+                bookingWorkingHours = bookingSettings.workingHours || {
+                    group1: { days:['sun','mon','tue','wed'], start:'16:00', end:'21:00' },
+                    group2: { days:['sat','thu'], start:'19:00', end:'22:00' }
+                };
+                // Normalize old format (sunWed/satThu, fromDay/toDay) to new format (group1/group2 with days array)
+                if (bookingWorkingHours.sunWed && !bookingWorkingHours.group1) {
+                    bookingWorkingHours.group1 = bookingWorkingHours.sunWed;
+                }
+                if (bookingWorkingHours.satThu && !bookingWorkingHours.group2) {
+                    bookingWorkingHours.group2 = bookingWorkingHours.satThu;
+                }
+
+                // Display working hours in cards (reversed: end → start)
+                const wh = bookingWorkingHours;
+                const g1 = wh.group1 || wh.sunWed || { days:['sun','mon','tue','wed'], start:'16:00', end:'21:00' };
+                const g2 = wh.group2 || wh.satThu || { days:['sat','thu'], start:'19:00', end:'22:00' };
+                // Normalize old fromDay/toDay to days array
+                if (g1.fromDay && !g1.days) g1.days = [g1.fromDay, g1.toDay].filter(Boolean);
+                if (g2.fromDay && !g2.days) g2.days = [g2.fromDay, g2.toDay].filter(Boolean);
+
+                const selectedDays = bookingSettings.days || ['sat','sun','mon','tue','wed','thu'];
+                const card1 = document.getElementById('cardSunWed');
+                const card2 = document.getElementById('cardSatThu');
+
+                const hasG1 = g1.days && g1.days.some(d => selectedDays.includes(d));
+                const hasG2 = g2.days && g2.days.some(d => selectedDays.includes(d));
+
+                card1.style.display = hasG1 ? '' : 'none';
+                card2.style.display = hasG2 ? '' : 'none';
+
+                document.getElementById('cardLabelSunWed').textContent = joinDayNames(g1.days);
+                document.getElementById('cardTimeSunWed').textContent =
+                    'من الساعه ' + toHour(g1.start) + ' إلى ' + toHour(g1.end) + ' م';
+                document.getElementById('cardLabelSatThu').textContent = joinDayNames(g2.days);
+                document.getElementById('cardTimeSatThu').textContent =
+                    'من الساعه ' + toHour(g2.start) + ' إلى ' + toHour(g2.end) + ' م';
+
+                // Apply colors from settings
+                const ballColors = bookingSettings.ballColors || {};
+                if (ballColors.group1 || ballColors.sunWed) {
+                    const c = ballColors.group1 || ballColors.sunWed;
+                    card1.style.background = 'linear-gradient(145deg, ' + c + '33, ' + c + '0a)';
+                    card1.style.boxShadow = '0 8px 30px ' + c + '1a, inset 0 1px 0 rgba(255,255,255,0.06)';
+                    card1.querySelector('.card-glow-line').style.background = c + '88';
+                }
+                if (ballColors.group2 || ballColors.satThu) {
+                    const c = ballColors.group2 || ballColors.satThu;
+                    card2.style.background = 'linear-gradient(145deg, ' + c + '33, ' + c + '0a)';
+                    card2.style.boxShadow = '0 8px 30px ' + c + '1a, inset 0 1px 0 rgba(255,255,255,0.06)';
+                    card2.querySelector('.card-glow-line').style.background = c + '88';
+                }
+
+                // Hide the entire section if no cards visible
+                document.getElementById('hoursAnnouncement').style.display = (hasG1 || hasG2) ? '' : 'none';
 
                 // 3. Fetch pricing services and populate booking type select
                 const pricingSnap = await get(ref(firebaseDb, dbPrefix + 'settings/pricingTable'));
@@ -526,11 +773,7 @@
 
         // Setup calendar picker restriction
         function initCalendar() {
-            // Map day identifiers to Flatpickr day index
-            // flatpickr days: 0 (Sun), 1 (Mon), 2 (Tue), 3 (Wed), 4 (Thu), 5 (Fri), 6 (Sat)
-            const dayMap = {
-                'sun': 0, 'mon': 1, 'tue': 2, 'wed': 3, 'thu': 4, 'fri': 5, 'sat': 6
-            };
+            const dayMap = { 'sun': 0, 'mon': 1, 'tue': 2, 'wed': 3, 'thu': 4, 'fri': 5, 'sat': 6 };
             const activeDays = (bookingSettings.days || []).map(d => dayMap[d.toLowerCase()]);
 
             flatpickrInstance = flatpickr("#bookingDate", {
@@ -539,56 +782,106 @@
                 minDate: "today",
                 disable: [
                     function(date) {
-                        // disable days that are not checked in activeDays
                         return !activeDays.includes(date.getDay());
                     }
                 ],
                 onChange: async function(selectedDates, dateStr) {
                     if (dateStr) {
-                        await loadAvailableSlots(dateStr);
+                        await autoAssignTime(dateStr);
                     }
                 }
             });
         }
 
-        // Load timeslots for a selected date
-        async function loadAvailableSlots(dateStr) {
-            const selectEl = document.getElementById('bookingSlot');
-            selectEl.disabled = true;
-            selectEl.innerHTML = '<option value="" selected disabled>جاري جلب الساعات المتاحة...</option>';
+        // Generate time slots from working hours
+        function generateTimeSlots(startStr, endStr, durationMin) {
+            const slots = [];
+            const [sh, sm] = startStr.split(':').map(Number);
+            const [eh, em] = endStr.split(':').map(Number);
+            let curMin = sh * 60 + sm;
+            const endMin = eh * 60 + em;
+            while (curMin < endMin) {
+                const h = Math.floor(curMin / 60);
+                const m = curMin % 60;
+                slots.push(String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'));
+                curMin += durationMin;
+            }
+            return slots;
+        }
 
+        // Convert 24h time to 12h display (numbers only, no Arabic period — use period-label instead)
+        function to12h(time24) {
+            const [h, m] = time24.split(':').map(Number);
+            const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+            return h12 + ':' + String(m).padStart(2, '0');
+        }
+
+        // Just the hour number (e.g., 16:00 → 4)
+        function toHour(time24) {
+            const h = parseInt(time24.split(':')[0]) || 0;
+            return h === 0 ? 12 : h > 12 ? h - 12 : h;
+        }
+
+        // Auto-assign next available time for a date
+        async function autoAssignTime(dateStr) {
+            const autoContainer = document.getElementById('autoTimeContainer');
+            const autoValue = document.getElementById('autoTimeValue');
+            autoContainer.style.display = 'none';
+            autoAssignedTime = '';
+
+            const date = new Date(dateStr);
+            const dayCodes = ['sun','mon','tue','wed','thu','fri','sat'];
+            const dayCode = dayCodes[date.getDay()]; // 0=sun,1=mon,...6=sat
+
+            // Find which working hours group applies to this day
+            const wh = bookingWorkingHours;
+            const groups = [wh.group1 || wh.sunWed, wh.group2 || wh.satThu];
+            let hours = null;
+            for (const g of groups) {
+                const gDays = g.days || (g.fromDay ? [g.fromDay, g.toDay].filter(Boolean) : []);
+                if (gDays.length > 0 && gDays.includes(dayCode)) {
+                    hours = g;
+                    break;
+                }
+            }
+            if (!hours) {
+                autoContainer.style.display = 'block';
+                autoValue.textContent = 'لا يوجد مواعيد متاحة لهذا اليوم';
+                autoValue.style.color = '#ef4444';
+                document.getElementById('submitBtn').disabled = true;
+                return;
+            }
+
+            const allSlots = generateTimeSlots(hours.start, hours.end, 30);
+
+            // Fetch booked slots for this date
+            let bookedTimes = [];
             try {
-                // Fetch all appointments for the clinic
                 const apptsSnap = await get(ref(firebaseDb, dbPrefix + 'appointments'));
-                const bookedTimes = [];
-
                 if (apptsSnap.exists()) {
-                    const appointments = apptsSnap.val();
-                    Object.values(appointments).forEach(appt => {
-                        // If there is an appointment on the same date, filter it out
-                        if (appt.date === dateStr && appt.status !== 'ملغي') {
-                            if (appt.time) {
-                                bookedTimes.push(appt.time.trim());
-                            }
+                    Object.values(apptsSnap.val()).forEach(appt => {
+                        if (appt.date === dateStr && appt.status !== 'ملغي' && appt.time) {
+                            bookedTimes.push(appt.time.trim());
                         }
                     });
                 }
-
-                // Render available slots
-                const allSlots = bookingSettings.slots || [];
-                const availableSlots = allSlots.filter(slot => !bookedTimes.includes(slot.trim()));
-
-                if (availableSlots.length === 0) {
-                    selectEl.innerHTML = '<option value="" selected disabled>عفواً، جميع المواعيد محجوزة اليوم</option>';
-                } else {
-                    selectEl.innerHTML = '<option value="" selected disabled>اختر الساعة...</option>' +
-                        availableSlots.map(slot => `<option value="${slot}">${slot}</option>`).join('');
-                    selectEl.disabled = false;
-                }
-
             } catch (err) {
-                console.error("Error loading slots:", err);
-                selectEl.innerHTML = '<option value="" selected disabled>خطأ في جلب المواعيد</option>';
+                console.error("Error fetching appointments:", err);
+            }
+
+            const available = allSlots.filter(s => !bookedTimes.includes(s));
+
+            if (available.length === 0) {
+                autoContainer.style.display = 'block';
+                autoValue.textContent = 'لا يوجد مواعيد متاحة لهذا اليوم';
+                autoValue.style.color = '#ef4444';
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                autoAssignedTime = available[0];
+                autoContainer.style.display = 'block';
+                autoValue.textContent = 'مواعيد العياده من الساعه ' + toHour(hours.start) + ' إلى ' + toHour(hours.end) + ' م';
+                autoValue.style.color = '';
+                document.getElementById('submitBtn').disabled = false;
             }
         }
 
@@ -604,11 +897,15 @@
             const age = document.getElementById('patientAge').value.trim();
             const gender = document.getElementById('patientGender').value;
             const date = document.getElementById('bookingDate').value;
-            const time = document.getElementById('bookingSlot').value;
+            const time = autoAssignedTime;
             const bookingType = document.getElementById('bookingType').value;
 
             if (!name || !phone || !age || !gender || !date || !time || !bookingType) {
-                errorEl.textContent = "يرجى تعبئة كافة الحقول بشكل صحيح.";
+                if (!time) {
+                    errorEl.textContent = "يرجى اختيار تاريخ الحجز أولاً لتوليد الموعد تلقائياً.";
+                } else {
+                    errorEl.textContent = "يرجى تعبئة كافة الحقول بشكل صحيح.";
+                }
                 errorEl.style.display = 'block';
                 return;
             }
@@ -624,12 +921,12 @@
                         appt.date === date && appt.time === time && appt.status !== 'ملغي'
                     );
                     if (isTaken) {
-                        errorEl.textContent = "عفواً، تم حجز هذا الوقت للتو من قبل مريض آخر. يرجى اختيار موعد آخر.";
+                        errorEl.textContent = "عفواً، تم حجز هذا الوقت للتو من قبل مريض آخر. يرجى اختيار تاريخ آخر.";
                         errorEl.style.display = 'block';
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = '<i class="fas fa-calendar-check me-1"></i> تأكيد الحجز أونلاين';
-                        // Refresh slots
-                        await loadAvailableSlots(date);
+                        // Re-assign a new time
+                        await autoAssignTime(date);
                         return;
                     }
                 }
@@ -703,7 +1000,6 @@
                 document.getElementById('recDoctor').textContent = clinicSettings.doctorName || 'طبيب العيادة';
                 document.getElementById('recPatientName').textContent = name;
                 document.getElementById('recDate').textContent = `${getArabicDay(date)} ${date}`;
-                document.getElementById('recSlot').textContent = time;
 
                 showView('successView');
 
